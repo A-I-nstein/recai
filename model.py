@@ -1,6 +1,7 @@
 import re
 import nltk
 import spacy
+import zipfile
 import pandas as pd
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -27,7 +28,8 @@ def lemma(tok_doc):
 def getStatsAndDocs(results):
 
   statutes_data = pd.read_csv('statutes.csv')
-  caseDocs_data = pd.read_csv('caseDoc.csv')
+  zf = zipfile.ZipFile('caseDoc.zip')
+  caseDocs_data = pd.read_csv(zf.open('caseDoc.csv'))
 
   statutes = pd.read_csv('query_to_statutes.csv')
   caseDocs = pd.read_csv('query_to_case_document.csv')
